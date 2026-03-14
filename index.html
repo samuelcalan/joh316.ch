@@ -76,12 +76,12 @@
       padding-top: 3rem;
     }
 
-    .hero-verse {
+    .hero .hero-verse {
       font-family: var(--font-display);
-      font-size: clamp(1.5rem, 3.2vw, 2rem);
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
       font-style: italic;
       color: var(--color-text-light);
-      max-width: 700px;
+      max-width: 800px;
       margin-bottom: 2.5rem;
       line-height: 1.9;
     }
@@ -435,7 +435,7 @@
     <a href="#schritt3">Gottes Lösung</a>
     <a href="#schritt4">Auferstehung</a>
     <a href="#schritt5">Glaube allein</a>
-    <a href="#schritt6">Nimm ihn an</a>
+    <a href="#schritt6">Ihn aufnehmen</a>
     <a href="#weiter">Wie weiter?</a>
   </nav>
 
@@ -568,7 +568,7 @@
   <section class="snap-section long-section" id="schritt6">
     <div class="content-inner fade-in">
       <p class="step-number">Schritt 6</p>
-      <h2>Nimm ihn an</h2>
+      <h2>Ihn aufnehmen</h2>
       <p>
         Jesus steht vor der Tür deines Herzens und klopft an. Er zwingt sich
         niemandem auf &ndash; aber er lädt dich ein, ihn aufzunehmen. Wenn du
@@ -714,7 +714,10 @@
       stepNav.scrollTo({ left: scrollTarget, behavior: 'smooth' });
     }
 
-    // Highlight active step and scroll nav
+    // Track whether a programmatic scroll is in progress
+    var isScrolling = false;
+
+    // Highlight active step, scroll nav, and toggle snap for long sections
     const stepObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -724,6 +727,14 @@
             link.classList.toggle('active', isActive);
             if (isActive) scrollNavToActive(link);
           });
+          // Only toggle snap when NOT in a programmatic scroll animation
+          if (!isScrolling) {
+            if (entry.target.classList.contains('long-section')) {
+              document.documentElement.style.scrollSnapType = 'y proximity';
+            } else {
+              document.documentElement.style.scrollSnapType = 'y mandatory';
+            }
+          }
         }
       });
     }, { threshold: 0.4 });
@@ -738,7 +749,8 @@
       var target = document.querySelector(href);
       if (!target) return;
 
-      // Disable snap during animation
+      // Mark animation in progress and disable snap
+      isScrolling = true;
       document.documentElement.style.scrollSnapType = 'none';
 
       var start = window.pageYOffset;
@@ -758,9 +770,14 @@
         if (progress < 1) {
           requestAnimationFrame(step);
         } else {
-          // Re-enable snap after landing exactly on target
+          // Re-enable appropriate snap mode based on target section
+          isScrolling = false;
           requestAnimationFrame(function() {
-            document.documentElement.style.scrollSnapType = 'y mandatory';
+            if (target.classList.contains('long-section')) {
+              document.documentElement.style.scrollSnapType = 'y proximity';
+            } else {
+              document.documentElement.style.scrollSnapType = 'y mandatory';
+            }
           });
         }
       }
