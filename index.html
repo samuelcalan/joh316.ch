@@ -369,7 +369,7 @@
       right: 0;
       z-index: 100;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 0;
       background: rgba(253, 251, 247, 0.92);
       backdrop-filter: blur(12px);
@@ -379,6 +379,15 @@
       transform: translateY(-100%);
       opacity: 0;
       transition: transform 0.4s ease, opacity 0.4s ease;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .step-nav::-webkit-scrollbar {
+      display: none;
     }
 
     .step-nav.visible {
@@ -696,13 +705,17 @@
 
     heroObserver.observe(hero);
 
-    // Highlight active step
+    // Highlight active step and scroll it into view in nav
     const stepObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
           navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            const isActive = link.getAttribute('href') === '#' + id;
+            link.classList.toggle('active', isActive);
+            if (isActive) {
+              link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
           });
         }
       });
