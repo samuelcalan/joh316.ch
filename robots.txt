@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://joh316.ch/sitemap.xml
