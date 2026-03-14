@@ -1,0 +1,41 @@
+name: Deploy joh316.ch to Hetzner VPS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy Site
+        run: |
+          rsync -rlgoDzvc -i --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude 'deployment' \
+            -e "ssh -i ~/.ssh/deploy_key" \
+            ./ \
+            deploy@${{ secrets.VPS_HOST }}:/var/www/joh316/
+
+      - name: Deploy Nginx Config & Reload
+        run: |
+          scp -i ~/.ssh/deploy_key \
+            deployment/nginx/joh316.conf \
+            deploy@${{ secrets.VPS_HOST }}:/tmp/joh316.conf
+          ssh -i ~/.ssh/deploy_key deploy@${{ secrets.VPS_HOST }} << 'EOF'
+            sudo -n /usr/bin/cp /tmp/joh316.conf /etc/nginx/sites-available/joh316
+            sudo -n /usr/bin/ln -sf /etc/nginx/sites-available/joh316 /etc/nginx/sites-enabled/joh316
+            sudo -n /usr/sbin/nginx -t && sudo -n /usr/bin/systemctl reload nginx
+            echo "joh316.ch deployed successfully at $(date)"
+          EOF
