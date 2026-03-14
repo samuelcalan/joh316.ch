@@ -776,12 +776,20 @@
             link.classList.toggle('active', isActive);
             if (isActive) scrollNavToActive(link);
           });
-          // Re-enable snap after scroll settles
+          // Re-enable snap: pin to exact target position first
           setTimeout(function() {
-            htmlEl.style.scrollSnapType = 'y mandatory';
-            sections.forEach(function(s) { s.style.scrollSnapAlign = 'start'; });
-            isScrolling = false;
-          }, 300);
+            // Force exact position before re-enabling snap
+            var finalPos = target.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo(0, finalPos);
+
+            // Use requestAnimationFrame to ensure position is applied before snap kicks in
+            requestAnimationFrame(function() {
+              htmlEl.style.scrollSnapType = 'y mandatory';
+              sections.forEach(function(s) { s.style.scrollSnapAlign = 'start'; });
+              // Keep isScrolling true a bit longer to block observer snap-back
+              setTimeout(function() { isScrolling = false; }, 500);
+            });
+          }, 100);
         }
       }
       requestAnimationFrame(animStep);
