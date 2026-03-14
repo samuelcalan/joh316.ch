@@ -746,37 +746,45 @@
       const target = document.querySelector(href);
       if (!target) return;
       isScrolling = true;
-      document.documentElement.style.scrollSnapType = 'none';
-      const start = window.scrollY;
-      const end = target.getBoundingClientRect().top + start;
-      const distance = end - start;
-      let startTime = null;
 
-      function step(timestamp) {
+      // Disable snap on both html and all snap sections
+      var htmlEl = document.documentElement;
+      htmlEl.style.scrollSnapType = 'none';
+      var sections = document.querySelectorAll('.snap-section');
+      sections.forEach(function(s) { s.style.scrollSnapAlign = 'none'; });
+
+      var start = window.pageYOffset;
+      var end = target.getBoundingClientRect().top + start;
+      var distance = end - start;
+      var startTime = null;
+
+      function animStep(timestamp) {
         if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const progress = Math.min(elapsed / duration, 1);
+        var elapsed = timestamp - startTime;
+        var progress = Math.min(elapsed / duration, 1);
         // ease-in-out cubic
-        const ease = progress < 0.5
+        var ease = progress < 0.5
           ? 4 * progress * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 3) / 2;
         window.scrollTo(0, start + distance * ease);
         if (progress < 1) {
-          requestAnimationFrame(step);
+          requestAnimationFrame(animStep);
         } else {
-          document.documentElement.style.scrollSnapType = 'y mandatory';
           // Set correct active nav link after scroll completes
-          const targetId = href.replace('#', '');
-          navLinks.forEach(link => {
-            const isActive = link.getAttribute('href') === href;
+          navLinks.forEach(function(link) {
+            var isActive = link.getAttribute('href') === href;
             link.classList.toggle('active', isActive);
             if (isActive) scrollNavToActive(link);
           });
-          // Re-enable observer after a short delay to let snap settle
-          setTimeout(() => { isScrolling = false; }, 200);
+          // Re-enable snap after scroll settles
+          setTimeout(function() {
+            htmlEl.style.scrollSnapType = 'y mandatory';
+            sections.forEach(function(s) { s.style.scrollSnapAlign = 'start'; });
+            isScrolling = false;
+          }, 300);
         }
       }
-      requestAnimationFrame(step);
+      requestAnimationFrame(animStep);
     }
 
     // Smooth scroll for nav links (disable snap temporarily)
