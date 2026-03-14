@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Johannes 3,16 – Die beste Nachricht der Welt</title>
+  <meta name="description" content="Das Evangelium erklärt – Gottes Plan der Rettung für dich.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-bg: #FDFBF7;
+      --color-bg-alt: #F7F3EC;
+      --color-text: #2C2C2C;
+      --color-text-light: #5A5A5A;
+      --color-accent: #8B1A1A;
+      --color-gold: #B8860B;
+      --color-divider: #E0D8CC;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Snap sections */
+    .snap-section {
+      scroll-snap-align: start;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      padding-top: 70px;
+      position: relative;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding-top: 3rem;
+    }
+
+    .hero-verse {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3.2vw, 2rem);
+      font-style: italic;
+      color: var(--color-text-light);
+      max-width: 700px;
+      margin-bottom: 2.5rem;
+      line-height: 1.9;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 600;
+      color: var(--color-text);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--color-text-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      font-size: 1.2rem;
+      color: var(--color-divider);
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); opacity: 0.4; }
+      50% { transform: translateY(8px); opacity: 1; }
+    }
+
+    /* Content sections */
+    .content-inner {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    .step-number {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--color-gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .snap-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .snap-section p {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: var(--color-text);
+    }
+
+    .verse-block {
+      border-left: 3px solid var(--color-gold);
+      padding: 1.4rem 1.8rem;
+      margin: 1.8rem 0;
+      background: rgba(184, 134, 11, 0.04);
+    }
+
+    .verse-block p {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+      line-height: 1.8;
+    }
+
+    .verse-block p strong {
+      font-weight: 600;
+    }
+
+    .verse-block cite {
+      font-family: var(--font-body);
+      font-style: normal;
+      font-size: 1rem;
+      color: var(--color-text-light);
+      font-weight: 400;
+    }
+
+    /* Alternating backgrounds */
+    .snap-section:nth-child(even) {
+      background-color: var(--color-bg-alt);
+    }
+
+    .snap-section:nth-child(odd) {
+      background-color: var(--color-bg);
+    }
+
+    /* Transition line between sections */
+    .snap-section::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 1px;
+      background: var(--color-divider);
+    }
+
+    .snap-section:last-child::after {
+      display: none;
+    }
+
+    /* CTA / Prayer */
+    .prayer-section {
+      background: #EDE8DD;
+      border-radius: 4px;
+      padding: 2.5rem 2.5rem;
+      margin: 1.8rem 0;
+    }
+
+    .prayer-section h3 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .prayer-section .prayer-text {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-style: italic;
+      line-height: 1.8;
+      color: var(--color-text);
+    }
+
+    /* Footer section */
+    .footer-section {
+      scroll-snap-align: none;
+      min-height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2.5rem 2rem 3rem;
+      border-top: 1px solid var(--color-divider);
+      background: var(--color-bg);
+    }
+
+    .footer-section p {
+      font-size: 1.1rem;
+      color: var(--color-text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+      color: var(--color-accent);
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+
+    .footer-section a:hover {
+      text-decoration: underline;
+    }
+
+    /* Fade-in Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .snap-section {
+        padding: 2.5rem 1.5rem;
+      }
+      .prayer-section {
+        padding: 2rem 1.5rem;
+      }
+      .content-inner {
+        max-width: 100%;
+      }
+    }
+
+    /* Long sections - keep snap but allow natural height */
+    .snap-section.long-section {
+      min-height: auto;
+      scroll-snap-align: start;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    .footer-section {
+      scroll-snap-align: start;
+    }
+
+    /* Next Steps */
+    .next-steps-list {
+      margin: 2.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .next-step-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .next-step-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+      margin-top: 0.2rem;
+    }
+
+    .next-step-item h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+    }
+
+    .next-step-item p {
+      font-size: 1.1rem;
+      color: var(--color-text);
+      margin-bottom: 0;
+    }
+
+    .contact-box {
+      background: #EDE8DD;
+      border-radius: 4px;
+      padding: 2rem 2.5rem;
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+
+    .contact-box p {
+      font-size: 1.15rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-link {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--color-accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Step Navigation */
+    .step-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: rgba(253, 251, 247, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-divider);
+      padding: 0;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .step-nav.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .step-nav a {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--color-text-light);
+      text-decoration: none;
+      padding: 0.9rem 1.2rem;
+      letter-spacing: 0.03em;
+      transition: color 0.3s ease, border-color 0.3s ease;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+    }
+
+    .step-nav a:hover {
+      color: var(--color-text);
+    }
+
+    .step-nav a.active {
+      color: var(--color-text);
+      font-weight: 600;
+      border-bottom-color: var(--color-accent);
+    }
+
+    @media (max-width: 600px) {
+      .step-nav a {
+        font-size: 0.8rem;
+        padding: 0.8rem 0.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="step-nav" id="stepNav">
+    <a href="#hero">Joh 3,16</a>
+    <a href="#schritt1">Gottes Liebe</a>
+    <a href="#schritt2">Die Trennung</a>
+    <a href="#schritt3">Gottes Lösung</a>
+    <a href="#schritt4">Auferstehung</a>
+    <a href="#schritt5">Glaube allein</a>
+    <a href="#schritt6">Nimm ihn an</a>
+    <a href="#weiter">Wie weiter?</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="snap-section hero" id="hero">
+    <p class="hero-verse">
+      &laquo;Denn so hat Gott die Welt geliebt, dass er seinen eingeborenen Sohn gab,
+      damit jeder, der an ihn glaubt, nicht verloren geht, sondern ewiges Leben hat.&raquo;
+    </p>
+    <h1>Johannes 3,16</h1>
+    <p class="hero-sub">Die beste Nachricht der Welt</p>
+    <span class="scroll-hint">&darr;</span>
+  </header>
+
+  <!-- Step 1 -->
+  <section class="snap-section" id="schritt1">
+    <div class="content-inner fade-in">
+      <p class="step-number">Schritt 1</p>
+      <h2>Gott liebt dich</h2>
+      <p>
+        Du bist kein Zufall. Der Gott, der das Universum erschaffen hat, kennt dich
+        persönlich &ndash; und er liebt dich bedingungslos. Er hat einen guten Plan
+        für dein Leben und möchte eine Beziehung zu dir.
+      </p>
+      <div class="verse-block">
+        <p>&laquo;Denn so hat Gott die Welt <strong>geliebt</strong>, dass er seinen eingeborenen <strong>Sohn</strong> gab &hellip;&raquo;</p>
+        <cite>Johannes 3,16a</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 2 -->
+  <section class="snap-section" id="schritt2">
+    <div class="content-inner fade-in">
+      <p class="step-number">Schritt 2</p>
+      <h2>Die Trennung</h2>
+      <p>
+        Doch es gibt ein Problem: Die Sünde. Jeder Mensch hat gesündigt &ndash;
+        durch Lügen, Egoismus, Neid oder andere Verfehlungen. Diese Sünde trennt
+        uns von Gott, denn er ist heilig und gerecht.
+      </p>
+      <div class="verse-block">
+        <p>&laquo;Denn <strong>alle</strong> haben <strong>gesündigt</strong> und erlangen nicht die Herrlichkeit Gottes.&raquo;</p>
+        <cite>Römer 3,23</cite>
+      </div>
+      <p>
+        Kein Mensch kann sich durch eigene Anstrengung, gute Werke oder religiöse
+        Handlungen selbst retten. Die Kluft zwischen uns und Gott ist zu gross.
+      </p>
+      <div class="verse-block">
+        <p>&laquo;Denn der Lohn der <strong>Sünde</strong> ist der <strong>Tod</strong> &hellip;&raquo;</p>
+        <cite>Römer 6,23a</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 3 -->
+  <section class="snap-section" id="schritt3">
+    <div class="content-inner fade-in">
+      <p class="step-number">Schritt 3</p>
+      <h2>Gottes Lösung</h2>
+      <p>
+        Aus Liebe zu uns hat Gott selbst die Lösung geschaffen: Er sandte seinen
+        Sohn Jesus Christus auf diese Erde. Jesus lebte ein vollkommen sündloses
+        Leben und starb freiwillig am Kreuz &ndash; an unserer Stelle.
+      </p>
+      <p>
+        Am Kreuz nahm Jesus die Strafe auf sich, die wir verdient hätten.
+        Er bezahlte den Preis für unsere Schuld &ndash; ein für alle Mal.
+      </p>
+      <div class="verse-block">
+        <p>&laquo;Gott aber erweist seine <strong>Liebe</strong> zu uns darin, dass <strong>Christus</strong>, als wir noch Sünder waren, <strong>für uns gestorben</strong> ist.&raquo;</p>
+        <cite>Römer 5,8</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 4 -->
+  <section class="snap-section" id="schritt4">
+    <div class="content-inner fade-in">
+      <p class="step-number">Schritt 4</p>
+      <h2>Die Auferstehung</h2>
+      <p>
+        Drei Tage nach seinem Tod ist Jesus von den Toten auferstanden. Damit hat
+        er den Tod besiegt und bewiesen, dass er wirklich Gottes Sohn ist. Die
+        Auferstehung ist die Garantie, dass auch wir ewiges Leben empfangen können.
+      </p>
+      <div class="verse-block">
+        <p>&laquo;Denn wenn du mit deinem Mund Jesus als <strong>Herrn bekennst</strong> und in deinem Herzen <strong>glaubst</strong>, dass Gott ihn aus den Toten <strong>auferweckt</strong> hat, wirst du <strong>gerettet</strong> werden.&raquo;</p>
+        <cite>Römer 10,9</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 5 -->
+  <section class="snap-section" id="schritt5">
+    <div class="content-inner fade-in">
+      <p class="step-number">Schritt 5</p>
+      <h2>Glaube allein</h2>
+      <p>
+        Rettung ist ein Geschenk. Du kannst sie dir nicht verdienen &ndash; du
+        kannst sie nur im Glauben annehmen. Gott bittet dich, ihm zu vertrauen
+        und das Werk anzunehmen, das Jesus am Kreuz vollbracht hat.
+      </p>
+      <div class="verse-block">
+        <p>&laquo;Denn aus <strong>Gnade</strong> seid ihr <strong>gerettet</strong> durch den <strong>Glauben</strong>, und das nicht aus euch &ndash; <strong>Gottes Gabe</strong> ist es; nicht aus Werken, damit niemand sich rühme.&raquo;</p>
+        <cite>Epheser 2,8&ndash;9</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Step 6 -->
+  <section class="snap-section long-section" id="schritt6">
+    <div class="content-inner fade-in">
+      <p class="step-number">Schritt 6</p>
+      <h2>Nimm ihn an</h2>
+      <p>
+        Jesus steht vor der Tür deines Herzens und klopft an. Er zwingt sich
+        niemandem auf &ndash; aber er lädt dich ein, ihn aufzunehmen. Wenn du
+        das tust, wirst du ein Kind Gottes.
+      </p>
+      <div class="verse-block">
+        <p>&laquo;So viele ihn aber <strong>aufnahmen</strong>, denen gab er das Recht, <strong>Kinder Gottes</strong> zu werden, denen, die an seinen Namen <strong>glauben</strong>.&raquo;</p>
+        <cite>Johannes 1,12</cite>
+      </div>
+      <p>
+        Du kannst jetzt, in diesem Moment, im Gebet zu Gott kommen. Es braucht
+        keine besonderen Worte &ndash; Gott sieht dein Herz. Wenn du möchtest,
+        kannst du etwa so beten:
+      </p>
+
+      <div class="prayer-section">
+        <h3>Ein Gebet</h3>
+        <p class="prayer-text">
+          Herr Jesus, ich erkenne, dass ich ein Sünder bin und deine Vergebung
+          brauche. Ich glaube, dass du am Kreuz für meine Sünden gestorben und
+          von den Toten auferstanden bist. Ich möchte mein Vertrauen ganz auf
+          dich setzen. Bitte komm in mein Leben, vergib mir meine Schuld und
+          schenke mir das ewige Leben. Danke, dass du mich liebst. Amen.
+        </p>
+      </div>
+
+      <p>
+        Wenn du dieses Gebet aufrichtig gesprochen hast, dann hat Gott dir
+        deine Sünden vergeben und dir ewiges Leben geschenkt. Nicht weil das
+        Gebet magische Kraft hätte &ndash; sondern weil du dein Vertrauen auf
+        Jesus gesetzt hast.
+      </p>
+      <div class="verse-block">
+        <p>&laquo;&hellip; die <strong>Gnadengabe</strong> Gottes aber ist <strong>ewiges Leben</strong> in Christus Jesus, unserem Herrn.&raquo;</p>
+        <cite>Römer 6,23b</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Next Steps -->
+  <section class="snap-section long-section" id="weiter">
+    <div class="content-inner fade-in">
+      <p class="step-number">Und nun?</p>
+      <h2>Wie geht es weiter?</h2>
+      <p>
+        Wenn du dein Leben Jesus anvertraut hast, beginnt eine wunderbare Reise
+        mit Gott. Hier sind einige erste Schritte, die dir helfen werden, im Glauben
+        zu wachsen:
+      </p>
+
+      <div class="next-steps-list">
+        <div class="next-step-item">
+          <span class="next-step-icon">&#128214;</span>
+          <div>
+            <h3>Lies die Bibel</h3>
+            <p>
+              Besorge dir eine Bibel &ndash; wir empfehlen die <strong>Schlachter-Übersetzung</strong>.
+              Beginne mit dem Johannesevangelium und lies täglich darin. Gottes Wort
+              ist Nahrung für deine Seele.
+            </p>
+          </div>
+        </div>
+
+        <div class="next-step-item">
+          <span class="next-step-icon">&#128591;</span>
+          <div>
+            <h3>Bete regelmässig</h3>
+            <p>
+              Sprich mit Gott &ndash; einfach und ehrlich, wie mit einem Vater. Danke ihm,
+              bitte ihn um Führung und teile ihm alles mit, was dich bewegt.
+            </p>
+          </div>
+        </div>
+
+        <div class="next-step-item">
+          <span class="next-step-icon">&#127970;</span>
+          <div>
+            <h3>Suche eine Gemeinde</h3>
+            <p>
+              Suche eine bibeltreue Gemeinde an deinem Ort. Gemeinschaft mit anderen
+              Christen ist wichtig &ndash; ihr könnt euch gegenseitig ermutigen und
+              gemeinsam im Glauben wachsen.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-box">
+        <p>
+          Hast du Fragen oder möchtest du eine Bibel bestellen?<br>
+          Schreib uns &ndash; wir helfen dir gerne weiter.
+        </p>
+        <p><a href="mailto:info@joh316.ch" class="contact-link">info@joh316.ch</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <p>&copy; joh316.ch</p>
+  </footer>
+
+  <script>
+    // Fade-in on scroll
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // Step navigation show/hide + active state
+    const stepNav = document.getElementById('stepNav');
+    const hero = document.getElementById('hero');
+    const stepIds = ['hero','schritt1','schritt2','schritt3','schritt4','schritt5','schritt6','weiter'];
+    const navLinks = stepNav.querySelectorAll('a');
+
+    // Show/hide nav based on hero visibility
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          stepNav.classList.remove('visible');
+        } else {
+          stepNav.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.05 });
+
+    heroObserver.observe(hero);
+
+    // Highlight active step
+    const stepObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.4 });
+
+    stepIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) stepObserver.observe(el);
+    });
+
+    // Smooth scroll for nav links (disable snap temporarily)
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          document.documentElement.style.scrollSnapType = 'none';
+          target.scrollIntoView({ behavior: 'smooth' });
+          // Re-enable snap after scroll completes
+          setTimeout(() => {
+            document.documentElement.style.scrollSnapType = 'y mandatory';
+          }, 800);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
