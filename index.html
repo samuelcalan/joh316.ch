@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Johannes 3,16 – Die beste Nachricht der Welt</title>
   <meta name="description" content="Das Evangelium erklärt – Gottes Plan der Rettung für dich.">
+  <link rel="canonical" href="https://joh316.ch/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://joh316.ch/">
+  <meta property="og:title" content="Johannes 3,16 – Die beste Nachricht der Welt">
+  <meta property="og:description" content="Das Evangelium erklärt – Gottes Plan der Rettung für dich.">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:site_name" content="joh316.ch">
+
+  <!-- Twitter / WhatsApp -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Johannes 3,16 – Die beste Nachricht der Welt">
+  <meta name="twitter:description" content="Das Evangelium erklärt – Gottes Plan der Rettung für dich.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -88,21 +104,27 @@
       font-weight: 400;
     }
 
-    .scroll-hint {
+    .scroll-hint-wrapper {
       position: absolute;
       bottom: 2.5rem;
+      display: block;
+      text-decoration: none;
+      animation: bounce 1.8s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    .scroll-hint {
+      display: block;
       width: 2.4rem;
       height: 2.4rem;
       border-left: 3px solid var(--color-gold);
       border-bottom: 3px solid var(--color-gold);
       transform: rotate(-45deg);
-      animation: bounce 1.8s ease-in-out infinite;
-      cursor: pointer;
     }
 
     @keyframes bounce {
-      0%, 100% { bottom: 2.5rem; opacity: 0.5; }
-      50% { bottom: 1.5rem; opacity: 1; }
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(12px); opacity: 1; }
     }
 
     /* Content sections */
@@ -200,14 +222,14 @@
 
     .prayer-section h3 {
       font-family: var(--font-display);
-      font-size: 2.2rem;
+      font-size: 1.6rem;
       font-weight: 600;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
     }
 
     .prayer-section .prayer-text {
       font-family: var(--font-display);
-      font-size: 2.2rem;
+      font-size: 1.45rem;
       font-style: italic;
       line-height: 1.8;
       color: var(--color-text);
@@ -295,9 +317,9 @@
     }
 
     .next-step-icon {
-      font-size: 2rem;
       flex-shrink: 0;
-      margin-top: 0.2rem;
+      margin-top: 0.3rem;
+      line-height: 0;
     }
 
     .next-step-item h3 {
@@ -416,7 +438,9 @@
     </p>
     <h1>Johannes 3,16</h1>
     <p class="hero-sub">Die beste Nachricht der Welt</p>
-    <span class="scroll-hint" aria-label="Nach unten scrollen"></span>
+    <a href="#schritt1" class="scroll-hint-wrapper" aria-label="Nach unten scrollen">
+      <span class="scroll-hint"></span>
+    </a>
   </header>
 
   <!-- Step 1 -->
@@ -434,6 +458,9 @@
         <cite>Johannes 3,16a</cite>
       </div>
     </div>
+    <a href="#schritt2" class="scroll-hint-wrapper" aria-label="Weiter scrollen">
+      <span class="scroll-hint"></span>
+    </a>
   </section>
 
   <!-- Step 2 -->
@@ -459,6 +486,9 @@
         <cite>Römer 6,23a</cite>
       </div>
     </div>
+    <a href="#schritt3" class="scroll-hint-wrapper" aria-label="Weiter scrollen">
+      <span class="scroll-hint"></span>
+    </a>
   </section>
 
   <!-- Step 3 -->
@@ -480,6 +510,9 @@
         <cite>Römer 5,8</cite>
       </div>
     </div>
+    <a href="#schritt4" class="scroll-hint-wrapper" aria-label="Weiter scrollen">
+      <span class="scroll-hint"></span>
+    </a>
   </section>
 
   <!-- Step 4 -->
@@ -497,6 +530,9 @@
         <cite>Römer 10,9</cite>
       </div>
     </div>
+    <a href="#schritt5" class="scroll-hint-wrapper" aria-label="Weiter scrollen">
+      <span class="scroll-hint"></span>
+    </a>
   </section>
 
   <!-- Step 5 -->
@@ -514,6 +550,9 @@
         <cite>Epheser 2,8&ndash;9</cite>
       </div>
     </div>
+    <a href="#schritt6" class="scroll-hint-wrapper" aria-label="Weiter scrollen">
+      <span class="scroll-hint"></span>
+    </a>
   </section>
 
   <!-- Step 6 -->
@@ -558,6 +597,9 @@
         <cite>Römer 6,23b</cite>
       </div>
     </div>
+    <a href="#weiter" class="scroll-hint-wrapper" aria-label="Weiter scrollen">
+      <span class="scroll-hint"></span>
+    </a>
   </section>
 
   <!-- Next Steps -->
@@ -573,7 +615,7 @@
 
       <div class="next-steps-list">
         <div class="next-step-item">
-          <span class="next-step-icon">&#128214;</span>
+          <span class="next-step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h6"/><path d="M8 11h4"/></svg></span>
           <div>
             <h3>Lies die Bibel</h3>
             <p>
@@ -585,7 +627,7 @@
         </div>
 
         <div class="next-step-item">
-          <span class="next-step-icon">&#128591;</span>
+          <span class="next-step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></span>
           <div>
             <h3>Bete regelmässig</h3>
             <p>
@@ -596,7 +638,7 @@
         </div>
 
         <div class="next-step-item">
-          <span class="next-step-icon">&#127970;</span>
+          <span class="next-step-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
           <div>
             <h3>Suche eine Gemeinde</h3>
             <p>
@@ -613,14 +655,14 @@
           Hast du Fragen oder möchtest du eine Bibel bestellen?<br>
           Schreib uns &ndash; wir helfen dir gerne weiter.
         </p>
-        <p><a href="mailto:info@joh316.ch" class="contact-link">info@joh316.ch</a></p>
+        <p><a href="mailto:info@joh316.ch" class="contact-link" rel="noopener">info@joh316.ch</a></p>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer-section">
-    <p>&copy; joh316.ch</p>
+    <p>&copy; joh316.ch &middot; <a href="/datenschutz.html">Datenschutz</a></p>
   </footer>
 
   <script>
@@ -671,19 +713,48 @@
       if (el) stepObserver.observe(el);
     });
 
+    // Smooth scroll helper with custom duration
+    function smoothScrollTo(href, duration) {
+      duration = duration || 1000;
+      const target = document.querySelector(href);
+      if (!target) return;
+      document.documentElement.style.scrollSnapType = 'none';
+      const start = window.scrollY;
+      const end = target.getBoundingClientRect().top + start;
+      const distance = end - start;
+      let startTime = null;
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease-in-out cubic
+        const ease = progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+        window.scrollTo(0, start + distance * ease);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          document.documentElement.style.scrollSnapType = 'y mandatory';
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
     // Smooth scroll for nav links (disable snap temporarily)
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        if (target) {
-          document.documentElement.style.scrollSnapType = 'none';
-          target.scrollIntoView({ behavior: 'smooth' });
-          // Re-enable snap after scroll completes
-          setTimeout(() => {
-            document.documentElement.style.scrollSnapType = 'y mandatory';
-          }, 800);
-        }
+        smoothScrollTo(link.getAttribute('href'));
+      });
+    });
+
+    // Smooth scroll for all scroll-hint chevrons
+    document.querySelectorAll('.scroll-hint-wrapper').forEach(hint => {
+      hint.addEventListener('click', (e) => {
+        e.preventDefault();
+        smoothScrollTo(hint.getAttribute('href'));
       });
     });
   </script>
