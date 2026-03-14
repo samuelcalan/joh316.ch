@@ -22,7 +22,7 @@ jobs:
       - name: Prepare Server Directory
         run: |
           ssh -i ~/.ssh/deploy_key deploy@${{ secrets.VPS_HOST }} \
-            "sudo mkdir -p /var/www/joh316 && sudo chown deploy:deploy /var/www/joh316"
+            "mkdir -p /var/www/joh316"
 
       - name: Deploy Site
         run: |
