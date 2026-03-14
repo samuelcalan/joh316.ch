@@ -44,7 +44,6 @@
     }
 
     html {
-      scroll-snap-type: y mandatory;
       overflow-y: scroll;
     }
 
@@ -57,9 +56,8 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Snap sections */
+    /* Full-height sections */
     .snap-section {
-      scroll-snap-align: start;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -237,7 +235,6 @@
 
     /* Footer section */
     .footer-section {
-      scroll-snap-align: none;
       min-height: auto;
       display: flex;
       flex-direction: column;
@@ -290,16 +287,11 @@
       }
     }
 
-    /* Long sections - keep snap but allow natural height */
+    /* Long sections - allow natural height */
     .snap-section.long-section {
       min-height: auto;
-      scroll-snap-align: start;
       padding-top: 5rem;
       padding-bottom: 5rem;
-    }
-
-    .footer-section {
-      scroll-snap-align: start;
     }
 
     /* Next Steps */
@@ -710,29 +702,22 @@
 
     // Scroll active nav link into view (only within the nav, not the page)
     function scrollNavToActive(link) {
-      const nav = stepNav;
-      const linkLeft = link.offsetLeft;
-      const linkWidth = link.offsetWidth;
-      const navWidth = nav.offsetWidth;
-      const scrollTarget = linkLeft - (navWidth / 2) + (linkWidth / 2);
-      nav.scrollTo({ left: scrollTarget, behavior: 'smooth' });
+      var linkLeft = link.offsetLeft;
+      var linkWidth = link.offsetWidth;
+      var navWidth = stepNav.offsetWidth;
+      var scrollTarget = linkLeft - (navWidth / 2) + (linkWidth / 2);
+      stepNav.scrollTo({ left: scrollTarget, behavior: 'smooth' });
     }
 
-    // Block observer updates while programmatic scroll is in progress
-    let isScrolling = false;
-
-    // Highlight active step and scroll it into view in nav
+    // Highlight active step and scroll nav
     const stepObserver = new IntersectionObserver((entries) => {
-      if (isScrolling) return;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = entry.target.id;
           navLinks.forEach(link => {
             const isActive = link.getAttribute('href') === '#' + id;
             link.classList.toggle('active', isActive);
-            if (isActive) {
-              scrollNavToActive(link);
-            }
+            if (isActive) scrollNavToActive(link);
           });
         }
       });
@@ -743,74 +728,42 @@
       if (el) stepObserver.observe(el);
     });
 
-    // Smooth scroll helper with custom duration
-    function smoothScrollTo(href, duration) {
-      duration = duration || 1000;
-      const target = document.querySelector(href);
+    // Smooth scroll to section with custom easing and duration
+    function scrollToSection(href) {
+      var target = document.querySelector(href);
       if (!target) return;
-      isScrolling = true;
-
-      // Disable snap on both html and all snap sections
-      var htmlEl = document.documentElement;
-      htmlEl.style.scrollSnapType = 'none';
-      var sections = document.querySelectorAll('.snap-section');
-      sections.forEach(function(s) { s.style.scrollSnapAlign = 'none'; });
-
       var start = window.pageYOffset;
-      var end = target.getBoundingClientRect().top + start;
+      var end = target.offsetTop;
       var distance = end - start;
+      var duration = 1200;
       var startTime = null;
 
-      function animStep(timestamp) {
+      function step(timestamp) {
         if (!startTime) startTime = timestamp;
-        var elapsed = timestamp - startTime;
-        var progress = Math.min(elapsed / duration, 1);
+        var progress = Math.min((timestamp - startTime) / duration, 1);
         // ease-in-out cubic
         var ease = progress < 0.5
           ? 4 * progress * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 3) / 2;
         window.scrollTo(0, start + distance * ease);
-        if (progress < 1) {
-          requestAnimationFrame(animStep);
-        } else {
-          // Set correct active nav link after scroll completes
-          navLinks.forEach(function(link) {
-            var isActive = link.getAttribute('href') === href;
-            link.classList.toggle('active', isActive);
-            if (isActive) scrollNavToActive(link);
-          });
-          // Re-enable snap: pin to exact target position first
-          setTimeout(function() {
-            // Force exact position before re-enabling snap
-            var finalPos = target.getBoundingClientRect().top + window.pageYOffset;
-            window.scrollTo(0, finalPos);
-
-            // Use requestAnimationFrame to ensure position is applied before snap kicks in
-            requestAnimationFrame(function() {
-              htmlEl.style.scrollSnapType = 'y mandatory';
-              sections.forEach(function(s) { s.style.scrollSnapAlign = 'start'; });
-              // Keep isScrolling true a bit longer to block observer snap-back
-              setTimeout(function() { isScrolling = false; }, 500);
-            });
-          }, 100);
-        }
+        if (progress < 1) requestAnimationFrame(step);
       }
-      requestAnimationFrame(animStep);
+      requestAnimationFrame(step);
     }
 
-    // Smooth scroll for nav links (disable snap temporarily)
+    // Nav link clicks
     navLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        smoothScrollTo(link.getAttribute('href'));
+        scrollToSection(link.getAttribute('href'));
       });
     });
 
-    // Smooth scroll for all scroll-hint chevrons
+    // Chevron clicks
     document.querySelectorAll('.scroll-hint-wrapper').forEach(hint => {
       hint.addEventListener('click', (e) => {
         e.preventDefault();
-        smoothScrollTo(hint.getAttribute('href'));
+        scrollToSection(hint.getAttribute('href'));
       });
     });
   </script>
