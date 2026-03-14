@@ -45,6 +45,7 @@
 
     html {
       overflow-y: scroll;
+      scroll-snap-type: y mandatory;
     }
 
     body {
@@ -58,6 +59,7 @@
 
     /* Full-height sections */
     .snap-section {
+      scroll-snap-align: start;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -290,6 +292,7 @@
     /* Long sections - allow natural height */
     .snap-section.long-section {
       min-height: auto;
+      scroll-snap-align: start;
       padding-top: 5rem;
       padding-bottom: 5rem;
     }
@@ -734,6 +737,10 @@
     function scrollToSection(href) {
       var target = document.querySelector(href);
       if (!target) return;
+
+      // Disable snap during animation
+      document.documentElement.style.scrollSnapType = 'none';
+
       var start = window.pageYOffset;
       var end = target.offsetTop;
       var distance = end - start;
@@ -748,7 +755,14 @@
           ? 4 * progress * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 3) / 2;
         window.scrollTo(0, start + distance * ease);
-        if (progress < 1) requestAnimationFrame(step);
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          // Re-enable snap after landing exactly on target
+          requestAnimationFrame(function() {
+            document.documentElement.style.scrollSnapType = 'y mandatory';
+          });
+        }
       }
       requestAnimationFrame(step);
     }
