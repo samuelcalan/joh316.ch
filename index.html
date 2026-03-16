@@ -89,15 +89,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 3rem 2rem;
-      padding-top: 70px;
+      padding: 4rem 2rem;
+      padding-top: 5rem;
       position: relative;
     }
 
     /* Hero */
     .hero {
       text-align: center;
-      padding-top: 3rem;
+      padding-top: 3rem !important;
     }
 
     .hero .hero-verse {
@@ -304,6 +304,7 @@
     @media (max-width: 600px) {
       .snap-section {
         padding: 2.5rem 1.5rem;
+        padding-top: 4.5rem;
       }
       .prayer-section {
         padding: 2rem 1.5rem;
@@ -716,9 +717,16 @@
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
 
-    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+    document.querySelectorAll('.fade-in').forEach(el => {
+      fadeObserver.observe(el);
+      // Trigger immediately for elements already in viewport
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('visible');
+      }
+    });
 
     // Step navigation show/hide + active state
     const stepNav = document.getElementById('stepNav');
